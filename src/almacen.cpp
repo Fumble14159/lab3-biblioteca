@@ -31,7 +31,7 @@ Biblioteca cargarBiblioteca(const std::string& ruta) {
         std::getline(ss, prestado, ';');
         try {
             std::unique_ptr<Libro> l;
-            if (tipo == "novedad") {
+            if (tipo == "Novedad") {
                 l = std::make_unique<Novedad>(std::stoi(codigo), titulo);
             } else {
                 l = std::make_unique<Libro>(std::stoi(codigo), titulo);
