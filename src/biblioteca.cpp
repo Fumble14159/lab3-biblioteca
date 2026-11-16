@@ -4,6 +4,9 @@
 #include <string>
 
 void Biblioteca::anadir(std::unique_ptr<Libro> libro) {
+    if (buscar(libro->getCodigo()) != nullptr) {
+        throw std::invalid_argument("Ya existe el libro " + std::to_string(libro->getCodigo()));
+    }
     libros_.push_back(std::move(libro));
 }
 
