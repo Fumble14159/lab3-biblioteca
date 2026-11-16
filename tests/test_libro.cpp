@@ -16,3 +16,52 @@ TEST(LibroTest, ConstructorGuardaLosDatos) {
 }
 
 // >>> AQUÍ <<<  Vuestros tests de Libro (guía, paso 4).
+
+TEST(LibroTest, PrecioCeroLanzaExcepcion) {             // valor límite: 0 NO es válido
+    EXPECT_THROW(Libro(0, "El Quijote"), std::invalid_argument);
+}
+
+TEST(LibroTest, PrecioMinimoPositivoNoLanza) {          // valor límite: el primero válido
+    EXPECT_NO_THROW(Libro(1, "El Quijote"));
+}
+
+TEST(LibroTest, NumeroNegativoLanzaExcepcion) {
+    EXPECT_THROW(Libro(-5, "El Quijote"), std::invalid_argument);
+}
+
+// ---- Reservar y liberar ----------------------------------------------------------
+TEST(LibroTest, PrestarCambiaElEstado) {
+    Libro l(1, "El Quijote");
+    EXPECT_TRUE(l.prestar());                    // ACTUAR y COMPROBAR a la vez
+    EXPECT_TRUE(l.estaPrestado());
+}
+
+TEST(LibroTest, PrestarDosVecesDevuelveFalse) {
+    Libro l(1, "El Quijote");
+    l.prestar();
+    EXPECT_FALSE(l.prestar());                   // la segunda vez ya estaba prestada
+    EXPECT_TRUE(l.estaPrestado());
+}
+
+TEST(LibroTest, DevolverDejaElLibroDisponible) {
+    Libro l(1, "El Quijote");
+    l.prestar();
+    l.devolver();
+    EXPECT_FALSE(l.estaPrestado());
+}
+
+// ---- Precio de la estancia ---------------------------------------------------------
+TEST(LibroTest, MultaMultiplicaporDias) {
+    Libro l(1, "El Quijote");
+    EXPECT_DOUBLE_EQ(l.multa(4), 2.0);
+}
+
+TEST(LibroTest, MultaconCeroDiasesCero) {   // valor límite
+    Libro l(1, "El Quijote");
+    EXPECT_DOUBLE_EQ(l.multa(0), 0.0);
+}
+
+TEST(LibroTest, MultaConDiasNegativosLanzaExcepcion) {   // valor límite
+    Libro l(1, "El Quijote");
+    EXPECT_THROW(l.multa(-1), std::invalid_argument);
+}
