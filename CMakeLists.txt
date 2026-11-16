@@ -54,6 +54,7 @@ enable_testing()
 # >>> AQUÍ <<<  Cada vez que creéis un fichero de tests nuevo en tests/, añadidlo aquí.
 add_executable(tests_gestor
     tests/test_libro.cpp
+    tests/test_novedad.cpp
     ${FUENTES}
 )
 target_include_directories(tests_gestor PRIVATE include)
