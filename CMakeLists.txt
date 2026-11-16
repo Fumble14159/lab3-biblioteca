@@ -56,6 +56,7 @@ add_executable(tests_gestor
     tests/test_libro.cpp
     tests/test_novedad.cpp
     tests/test_biblioteca.cpp
+    tests/test_almacen.cpp
     ${FUENTES}
 )
 target_include_directories(tests_gestor PRIVATE include)
