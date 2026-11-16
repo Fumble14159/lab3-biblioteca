@@ -9,6 +9,7 @@ Libro::Libro(int codigo, const std::string& titulo)
 }
 
 bool Libro::prestar() {
+    if (prestado_) return false;
     prestado_ = true;
     return true;
 }
